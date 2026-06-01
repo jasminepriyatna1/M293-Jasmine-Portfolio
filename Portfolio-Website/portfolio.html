@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Jasmine Priyatna</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">PORTFOLIO</a>
+            <nav class="nav-links">
+                <a href="index.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+                <a href="personas.html">Personas</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Selected Work</h2>
+            
+            <div class="portfolio-filters">
+                <button class="filter-btn active" onclick="filterPortfolio('all')">All</button>
+                <button class="filter-btn" onclick="filterPortfolio('web-tech')">Web & Tech</button>
+                <button class="filter-btn" onclick="filterPortfolio('media-award')">Media & Award</button>
+                <button class="filter-btn" onclick="filterPortfolio('content-creation')">Content Creation</button>
+            </div>
+
+            <div class="grid-2 portfolio-grid">
+                <!-- Projekt 1 -->
+                <div class="project-card" data-theme="web-tech" onclick="openArticle('portfolio-website')">
+                    <div class="project-img">
+                        <img src="PWSS.png" alt="Portfolio Website" class="portfolio-pic">
+                    </div>
+                    <h4>Portfolio Website</h4>
+                    <p>Structured platform showcasing context, development, and visual work.</p>
+                </div>
+                <!-- Projekt 2 -->
+                <div class="project-card" data-theme="web-tech" onclick="openArticle('social-psychology')">
+                    <div class="project-img">
+                        <img src="Substack.png" alt="Articles Page" class="portfolio-pic">
+                    </div>
+                    <h4>Articles: Social Psychology, Power Dynamics, Behavioural Awareness</h4>
+                    <p>Exploring perception, behavior, and decisions.</p>
+                </div>
+                <!-- Projekt 3 -->
+                <div class="project-card" data-theme="media-award" onclick="openArticle('influencer-awards')">
+                    <div class="project-img">
+                        <img src="SIA.jpg" alt="Swiss Influencers Awards 2025" class="portfolio-pic">
+                    </div>
+                    <h4>Swiss Influencer Awards 2025</h4>
+                    <p>Participation in a national creator platform.</p>
+                </div>
+                <!-- Projekt 4 -->
+                <div class="project-card" data-theme="media-award" onclick="openArticle('editorial-magazine')">
+                    <div class="project-img">[
+                        <img src="EMF.jpg" alt="Magazine Shoot" class="portfolio-pic">
+                    </div>
+                    <h4>Editorial & Magazine Features</h4>
+                    <p>Visual work across editorial and lifestyle formats.</p>
+                </div>
+                <!-- Projekt 5 -->
+                <div class="project-card" data-theme="media-award" onclick="openArticle('MEC26')">
+                    <div class="project-img">[
+                        <img src="MEC26.jpg" alt="Miss Europe Continental" class="portfolio-pic">
+                    </div>
+                    <h4>Upcoming Miss Europe Continental 2026</h4>
+                    <p>Selected participation in an international platform.</p>
+                </div>
+                <!-- Projekt 6 -->
+                <div class="project-card" data-theme="content-creation" onclick="openArticle('UGC-creator')">
+                    <div class="project-img">[
+                        <img src="TTC.jpg" alt="Tiktok Collage" class="portfolio-pic">
+                    </div>
+                    <h4>UGC Content & Campaign Work</h4>
+                    <p>Short-form content focused on engagement and influence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL ARTICLE OVERLAY SYSTEM -->
+    <div id="articleOverlay" class="article-overlay">
+        <div class="article-content">
+            <button class="close-overlay" onclick="closeArticle()">✕</button>
+            <h1 id="articleTitle" class="section-title"></h1>
+            <div id="articleBody" class="article-body"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FÜR FILTER & INLINE-ARTIKEL OVERLAY -->
+    <script>
+        // Artikeldaten-Datenbank
+        const articlesData = {
+            'portfolio-website': {
+                title: 'Portfolio Website',
+                body: '<p>As an Application Development Apprentice and content creator based in St. Gallen, Switzerland, I needed a digital space that could seamlessly balance technical logic with visual creativity, which is why I am thrilled to launch my official portfolio website. Built entirely from scratch using semantic HTML5 and clean CSS Grid layouts, the platform embraces a premium dark-mode aesthetic utilizing a sleek pitch-black canvas accented by sharp crimson red. By avoiding heavy frameworks, the website achieves blazing-fast load times and flawless responsiveness across all desktop and mobile devices. The structured layout is engineered to guide visitors smoothly through my diverse professional identity, spanning a clean overview of my background, a scannable visual directory of my technical strengths, and a balanced grid showcasing projects ranging from web development to national platforms like the Swiss Influencer Awards. Ultimately, this website represents the perfect intersection of my world—where precise code meets vision—and I invite you to take a look around, explore the project files, and connect.</p>'
+            },
+            'social-psychology': {
+                title: 'Articles: Social Psychology',
+                body: '<p>Alongside my technical pursuits, I run a dedicated Substack publication focused on social psychology, human behavior, and the subtle mechanics of power dynamics. Writing about these topics is something I am incredibly passionate about, as it allows me to explore the fascinating complexity of the human mind while simultaneously sharpening my own analytical thinking and research skills. The platform serves as an intellectual outlet where I dissect how people perceive their surroundings, make critical decisions, and navigate complex social hierarchies. By bridging behavioral awareness with real-world observations, each piece challenges conventional thinking and provides readers with actionable insights into the psychological forces that shape our daily interactions. This deep dive into human behavior beautifully complements the structured logic of my application development background, proving that data and human nature are deeply interconnected, and I invite thinkers, creators, and professionals alike to subscribe and join the conversation.</p>'
+            },
+            'influencer-awards': {
+                title: 'Swiss Influencer Awards 2025',
+                body: '<p>Building on my passion for content creation, attending the Swiss Influencer Awards 2025 was a phenomenal milestone that perfectly merged my creative drive with the fast-paced world of modern media. Being part of such a prestigious national platform allowed me to immerse myself in the forefront of digital storytelling, connect with fellow visionary creators, and gain invaluable industry insights into audience engagement and brand dynamics. This experience was deeply empowering, fueling my passion for producing impactful user-generated content and editorial work while testing my ability to analyze digital trends in real-time. Navigating an event of this scale not only expanded my professional network but also heightened my strategic thinking regarding how media, psychology, and technology intersect, inspiring me to continuously elevate the quality, visual aesthetic, and analytical depth of the content I bring to the digital space.</p>'
+            },
+            'editorial-magazine': {
+                title: 'Editorial & Magazine Features',
+                body: '<p>My editorial and magazine features represent another vital facet of my creative journey, serving as a dynamic playground where visual storytelling, fashion, and high-end aesthetics meet. Working within editorial and lifestyle formats allows me to express a sophisticated, cinematic vision, using creative direction, modeling, and styling to communicate powerful narratives without uttering a single word. Every feature is a lesson in precision and artistic execution, requiring a deep understanding of composition, lighting, and how to evoke specific emotions for an audience. This visual work is not just about capturing a striking image; it directly feeds back into my digital projects and content creation, sharpening my eye for user experience design, layout harmony, and modern aesthetics. Seamlessly blending these editorial features into my portfolio highlights my versatility, proving that the structured clarity needed for code and the fluid expression needed for visual art can beautifully coexist in a unified professional identity.</p>'
+            },
+            'MEC26': {
+                title: 'Upcoming Miss Europe Continental 2026',
+                body: '<p>Looking ahead to the next grand chapter of my creative career, competing in the upcoming Miss Europe Continental 2026 represents an extraordinary pinnacle that unites my years of dedication in the modeling industry with my passion for international cultural exchange. Stepping onto such an elite global stage requires a rigorous fusion of discipline, elite runway presentation, and strategic communication, pushing me to elevate my professional boundaries to their absolute highest level. This prestigious European platform is not merely a celebration of high fashion and aesthetic poise; it is an incredible opportunity to amplify my voice, project my values on a continental scale, and showcase the modern, multi-faceted identity of today’s ambitious young women. Representing my roots in this world-class arena beautifully mirrors the analytical strategy and artistic precision I apply to all my technical and content creation endeavors, demanding peak focus and resilience. Ultimately, participating in Miss Europe Continental 2026 is a defining milestone that perfectly bridges the worlds of high-end editorial artistry and empowering global leadership, inspiring me to make a lasting, sophisticated impact on the international stage.</p>'
+            },
+            'UGC-creator': {
+                title: 'UGC Content & Campaign Work',
+                body: '<p>At the absolute peak of my content creation journey stands my extensive work in User-Generated Content (UGC) and high-impact brand campaigns, highlighted by the phenomenal achievement of generating over 200 million views on a single viral video. This monumental milestone is a masterclass in modern digital strategy, showcasing my deep, intuitive understanding of consumer psychology, algorithmic trends, and the exact hook-and-retention mechanics required to capture global attention in seconds. Developing UGC and managing end-to-end campaign work means blending data-driven performance with authentic, relatable storytelling that converts casual scrollers into highly engaged communities. This explosive viral success proved that my creative instincts are backed by hard analytical results, demonstrating my ability to concept, shoot, and optimize content that shatters traditional marketing benchmarks. For brands looking to make a massive, culturally relevant impact, my track record in the UGC space offers a rare fusion of elite creative direction and proven algorithmic power, turning views into true brand authority.</p>'
+            }
+        };
+
+        // Filter-Logik
+        function filterPortfolio(theme) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.project-card').forEach(card => {
+                if (theme === 'all' || card.getAttribute('data-theme') === theme) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Overlay öffnen
+        function openArticle(id) {
+            const article = articlesData[id];
+            if (article) {
+                document.getElementById('articleTitle').innerText = article.title;
+                document.getElementById('articleBody').innerHTML = article.body;
+                document.getElementById('articleOverlay').style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Verhindert Scrollen im Hintergrund
+            }
+        }
+
+        // Overlay schliessen
+        function closeArticle() {
+            document.getElementById('articleOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+
+</body>
+</html>
